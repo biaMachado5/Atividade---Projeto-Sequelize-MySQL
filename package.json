@@ -10,8 +10,11 @@
   "author": "Bianca Machado",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "express": "^5.1.0",
     "express-handlebars": "^8.0.3",
+    "express-validator": "^7.2.1",
+    "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.15.1",
     "sequelize": "^6.37.7"
   },
