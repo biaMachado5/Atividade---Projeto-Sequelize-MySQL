@@ -3,6 +3,17 @@
   <a href="/users/create" class="btn btn-primary">➕ Adicionar Novo Usuário</a>
 </div>
 
+<!-- Formulário de busca e filtro -->
+<form method="get" action="/" class="search-form">
+  <input type="text" name="q" value="{{q}}" placeholder="🔍 Buscar por nome..." />
+  <select name="newsletter">
+    <option value="">Todos</option>
+    <option value="true" {{#if (eq newsletter "true")}}selected{{/if}}>Com newsletter</option>
+    <option value="false" {{#if (eq newsletter "false")}}selected{{/if}}>Sem newsletter</option>
+  </select>
+  <button type="submit">Filtrar</button>
+</form>
+
 {{#if users}}
 <div class="users-grid">
   {{#each users}}
@@ -30,9 +41,19 @@
     </div>
   {{/each}}
 </div>
+
+<!-- Paginação -->
+<div class="pagination">
+  {{#each (range 1 totalPages)}}
+    <a href="/?page={{this}}{{#if ../q}}&q={{../q}}{{/if}}{{#if ../newsletter}}&newsletter={{../newsletter}}{{/if}}" 
+       class="{{#if (eq ../currentPage this)}}active{{/if}}">
+      {{this}}
+    </a>
+  {{/each}}
+</div>
 {{else}}
 <div class="empty-state">
-  <h3>😔 Nenhum usuário cadastrado ainda</h3>
+  <h3>😔 Nenhum usuário encontrado</h3>
   <p>Que tal adicionar o primeiro usuário?</p>
   <a href="/users/create" class="btn btn-primary">➕ Cadastrar Primeiro Usuário</a>
 </div>

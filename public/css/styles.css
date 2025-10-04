@@ -297,3 +297,137 @@ body {
     gap: 1rem;
   }
 }
+
+/* ============================
+   Filtros e Busca
+   ============================ */
+.filters {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  padding: 1rem;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.filters .form-control {
+  flex: 1;
+  min-width: 200px;
+}
+
+.filters .btn {
+  padding: 0.6rem 1.2rem;
+  font-size: 0.85rem;
+}
+
+/* ============================
+   Paginação
+   ============================ */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 2rem 0;
+  flex-wrap: wrap;
+}
+
+.pagination a,
+.pagination span {
+  display: inline-block;
+  padding: 0.6rem 1rem;
+  border-radius: 5px;
+  background: white;
+  border: 2px solid #e9ecef;
+  color: #495057;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s;
+  min-width: 40px;
+  text-align: center;
+}
+
+.pagination a:hover {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.pagination .active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-color: transparent;
+  font-weight: bold;
+  pointer-events: none;
+}
+
+/* =============================== */
+/* Estilo para o formulário de busca e filtro */
+/* =============================== */
+
+.search-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-bottom: 2rem;
+  background: white;
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  align-items: center;
+}
+
+.search-form input[type="text"],
+.search-form select {
+  padding: 0.6rem 1rem;
+  border-radius: 5px;
+  border: 2px solid #e9ecef;
+  font-size: 0.95rem;
+  transition: all 0.3s;
+  min-width: 180px;
+}
+
+.search-form input[type="text"]:focus,
+.search-form select:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.search-form button {
+  padding: 0.65rem 1.2rem;
+  border: none;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.search-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.search-form input[type="text"]::placeholder {
+  color: #adb5bd;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .search-form {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .search-form input[type="text"],
+  .search-form select,
+  .search-form button {
+    width: 100%;
+  }
+}
