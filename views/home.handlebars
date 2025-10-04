@@ -1,0 +1,39 @@
+<div class="page-header">
+  <h1>👥 Usuários Cadastrados</h1>
+  <a href="/users/create" class="btn btn-primary">➕ Adicionar Novo Usuário</a>
+</div>
+
+{{#if users}}
+<div class="users-grid">
+  {{#each users}}
+    <div class="user-card">
+      <div class="user-info">
+        <h3>{{this.name}}</h3>
+        <p class="occupation">💼 {{this.occupation}}</p>
+        <p class="newsletter">
+          {{#if this.newsletter}}
+            📧 Recebe newsletter
+          {{else}}
+            📭 Não recebe newsletter
+          {{/if}}
+        </p>
+      </div>
+      <div class="user-actions">
+        <a href="/users/{{this.id}}" class="btn btn-info">👁️ Ver</a>
+        <a href="/users/edit/{{this.id}}" class="btn btn-warning">✏️ Editar</a>
+        <form action="/users/delete/{{this.id}}" method="POST" class="delete-form">
+          <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir este usuário?')">
+            🗑️ Excluir
+          </button>
+        </form>
+      </div>
+    </div>
+  {{/each}}
+</div>
+{{else}}
+<div class="empty-state">
+  <h3>😔 Nenhum usuário cadastrado ainda</h3>
+  <p>Que tal adicionar o primeiro usuário?</p>
+  <a href="/users/create" class="btn btn-primary">➕ Cadastrar Primeiro Usuário</a>
+</div>
+{{/if}}
