@@ -1,8 +1,9 @@
 const { Sequelize } = require('sequelize');
 
 // Configuração da conexão com o banco de dados
-const sequelize = new Sequelize('nodesequelize', 'root', '', {
-  host: 'localhost',
+const sequelize = new Sequelize('defaultdb', 'avnadmin', 'AVNS_8JgeEHEazn_7-7WWAMP', {
+  host: 'mysql-3635265-germinare-9bf7.c.aivencloud.com',
+  port: 28263,
   dialect: 'mysql',
   logging: console.log, // Mostra as queries SQL no console
   define: {
@@ -14,6 +15,12 @@ const sequelize = new Sequelize('nodesequelize', 'root', '', {
     min: 0,  // Mínimo de conexões
     acquire: 30000, // Tempo máximo para obter conexão (30s)
     idle: 10000, // Tempo máximo que uma conexão pode ficar inativa (10s)
+  },
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false, // Necessário para conexões Aiven
+    },
   },
 });
 
