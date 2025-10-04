@@ -1,0 +1,211 @@
+{{#if error}}
+<div class="alert alert-error">
+  ⚠️ {{error}}
+  <a href="/" class="btn btn-primary">⬅️ Voltar para Lista</a>
+</div>
+{{else}}
+<div class="page-header">
+  <h1>👤 Detalhes do Usuário</h1>
+  <div class="header-actions">
+    <a href="/" class="btn btn-info">⬅️ Voltar</a>
+    <a href="/users/edit/{{user.id}}" class="btn btn-warning">✏️ Editar</a>
+  </div>
+</div>
+
+<div class="user-details">
+  <div class="user-main-info">
+    <h2>{{user.name}}</h2>
+  
+    <div class="info-grid">
+      <div class="info-item">
+        <strong>💼 Profissão:</strong>
+        <span>{{#if user.occupation}}{{user.occupation}}{{else}}Não informada{{/if}}</span>
+      </div>
+    
+      <div class="info-item">
+        <strong>📧 Newsletter:</strong>
+        <span class="newsletter-status {{#if user.newsletter}}active{{else}}inactive{{/if}}">
+          {{#if user.newsletter}}
+            ✅ Ativo
+          {{else}}
+            ❌ Inativo
+          {{/if}}
+        </span>
+      </div>
+    
+      <div class="info-item">
+        <strong>📅 Cadastrado em:</strong>
+        <span>{{formatDate user.createdAt}}</span>
+      </div>
+    
+      {{#if user.updatedAt}}
+      <div class="info-item">
+        <strong>🔄 Última atualização:</strong>
+        <span>{{formatDate user.updatedAt}}</span>
+      </div>
+      {{/if}}
+    </div>
+  </div>
+
+  {{#if user.addresses}}
+  <div class="addresses-section">
+    <h3>🏠 Endereços ({{user.addresses.length}})</h3>
+  
+    {{#if user.addresses.length}}
+    <div class="addresses-list">
+      {{#each user.addresses}}
+      <div class="address-card">
+        <div class="address-info">
+          <strong>📍 {{this.street}}</strong>
+          {{#if this.number}}, {{this.number}}{{/if}}
+          <br>
+          <span class="city">🏘️ {{this.city}}</span>
+        </div>
+        <div class="address-actions">
+          <span class="address-id">#{{this.id}}</span>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+    {{else}}
+    <div class="empty-addresses">
+      <p>📭 Nenhum endereço cadastrado ainda</p>
+      <a href="/users/edit/{{user.id}}" class="btn btn-primary">➕ Adicionar Endereço</a>
+    </div>
+    {{/if}}
+  </div>
+  {{/if}}
+  
+  <div class="actions-section">
+    <a href="/users/edit/{{user.id}}" class="btn btn-primary">✏️ Editar Usuário</a>
+    <form action="/users/delete/{{user.id}}" method="POST" class="delete-form">
+      <button type="submit" class="btn btn-danger" 
+              onclick="return confirm('⚠️ Tem certeza que deseja excluir este usuário?\n\nEsta ação não pode ser desfeita e também excluirá todos os endereços associados.')">
+        🗑️ Excluir Usuário
+      </button>
+    </form>
+  </div>
+</div>
+
+<style>
+.header-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.user-main-info {
+  margin-bottom: 2rem;
+}
+
+.user-main-info h2 {
+  color: #495057;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  border-bottom: 2px solid #e9ecef;
+  padding-bottom: 0.5rem;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.info-item {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 5px;
+  border-left: 4px solid #667eea;
+}
+
+.info-item strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #495057;
+}
+
+.newsletter-status.active {
+  color: #28a745;
+  font-weight: bold;
+}
+
+.newsletter-status.inactive {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+.addresses-section {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.addresses-section h3 {
+  color: #495057;
+  margin-bottom: 1rem;
+}
+
+.addresses-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.address-card {
+  background: white;
+  padding: 1rem;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.city {
+  color: #6c757d;
+  font-style: italic;
+}
+
+.address-id {
+  background: #e9ecef;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.875rem;
+  color: #6c757d;
+}
+
+.empty-addresses {
+  text-align: center;
+  padding: 2rem;
+  color: #6c757d;
+}
+
+.actions-section {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 2px solid #e9ecef;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .header-actions {
+    flex-direction: column;
+  }
+  
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .actions-section {
+    flex-direction: column;
+  }
+  
+  .address-card {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+</style>
+{{/if}}
